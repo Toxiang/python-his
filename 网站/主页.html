@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的网站</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body, button, input, select, td, textarea a {
+                font: 15px Tahoma,Verdana,Arial,Helvetica,"\5b8b\4f53",sans-serif;
+                color: red;
+            }
+
+        a{
+            text-decoration: none;
+        }
+        body{
+
+            font-size: 12px;
+        }
+        .head{
+            background-color: green;
+            height: 44px;
+            width: 100%;
+            top: 0;
+            left: 0;
+        z-index: 1000;
+        }
+        .head_content{
+            background-color: greenyellow;
+            height: 44px;
+            width: 1000px;
+            line-height: 40px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .logo{
+            background: url("image/logo.png");
+            height: 20px;
+            width: 66px;
+            margin-top: 10px;
+            float: left;
+        }
+        .menu{
+            float: left;
+            margin-left:20px;
+            /*margin-top: 4px;*/
+        }
+        .menu a.tb{
+            color: black;
+            margin-left: -8px;
+            padding: 0 13px 0 10px;
+            display: inline-block;
+            /*margin-top: 4px;*/
+        }
+        .menu a.tb:hover{
+            color: #00ff00;
+            background-color: #87ba21;
+            /*margin-top: 4px;*/
+        }
+        .menu a.active,.menu a.active:hover{
+                color: #fff;
+                background-color: #204982;
+        }
+        .search{
+            float: right;
+            margin-top: 11px;
+        }
+        .search .search-text{
+            width: 91px;
+            height: 16px;
+            color: black;
+            padding: 2px 1px 1px 5px;
+        }
+        .search .search-text,.serch .a.i{
+            float: left;
+        }
+        .search .ico{
+            background: url("image/icon.png") no-repeat 0 -197px;
+            height: 14px;
+            width: 15px;
+            display: inline-block;
+            margin-bottom: 6px;
+            margin-left:10px;
+        }
+         .search a.i{
+             height: 20px;
+             width: 27px;
+             background-color: #f4f4f4;
+             display: inline-block;
+             border: 1px yellow solid;
+
+        }
+        .login_resgister{
+            position: absolute;
+            right: 160px;
+            /*margin-top: 4px;*/
+        }
+        .login_resgister a{
+            color: white;
+            padding: 0 10px;
+            display: inline-block;
+        }
+        .login_resgister a:hover{
+            background-color:greenyellow ;
+
+        }
+        /*顶部css格式*/
+
+        .main-content-box{
+            width: 100%;
+
+            background-color: #bcc9d5;
+        }
+        .main-content{
+            margin: 0 460px;
+            background-color: #fff;
+            overflow: hidden;
+            width: 945px;
+            height: auto!important;
+            min-height: 700px;
+
+            padding: 6px 28px 60px 28px;
+        }
+        .content_L{
+            float: left;
+            width: 650px;
+            background-color: white;
+        }
+        .child-nav,.sort-nav{
+            float: left;
+            padding: 10px;
+        }
+        .publish-btn{
+            float: right;
+            padding: 10px;
+        }
+
+        .top-area{
+            overflow: hidden;
+            border-bottom: 1px solid red ;
+        }
+
+        .child-nav .active{
+            background: url("image/tip.png") no-repeat 0 -299px;
+            color: black;
+        }
+        .child-nav a{
+            display: inline-block;
+            width: 60px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            color: #369;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+        .child-nav a.newbtn:hover{
+            color: red;
+            background-color: white;
+            background: url("image/tip.png") no-repeat 0 -299px;
+        }
+        .child-nav a.personbtn:hover{
+            color: red;
+            background-color: white;
+            background: url("image/tip.png") no-repeat 0 -299px;
+        }
+
+        .sort-nav {
+            margin-left: 144px;
+            margin-top: 10px;
+        }
+        .sort-nav .active{
+            color: #b4b4b4;
+        }
+        .sort-nav a{
+            margin-left: 10px;
+            color: darkgreen;
+        }
+        .sort-nav a.newbtn:hover{
+            color: red;
+            background-color: white;
+        }
+
+        .publish-btn{
+            display: inline-block;
+            width:80px;
+            height: 18px;
+            background-color: green;
+            color: #fff;
+            line-height: 18px;
+            text-align: center;
+
+        }
+
+        #content_img li{
+            width: 680px;
+            color: white;
+            display: none;
+        }
+        #content_img li div{
+          width: 156px;
+          margin-right: 14px;
+          float: left;
+          text-align: center;
+        }
+        #content_img li div a{
+          font-size: 14px;
+          color: black;
+          line-height: 14px;
+        /*  float: left;*/
+          display: inline-block;
+          margin-top: 10px;
+        }
+        #content_img li a:hover{
+          color: #B70606;
+        }
+        #content_img li div span{
+            font-size: 16px;
+            line-height: 16px;
+            /*float: left;*/
+            display: block;
+            color: red;
+            margin-top: 10px;
+          }
+        #content_img img{
+          float: left;
+          width: 150px;
+          height: 150px;
+        }
+        #content_img .show{
+          display: block;
+        }
+        .show span{
+            color: red;
+            font-size: 30px;
+        }
+
+
+        .footer-box{
+            background-color: #fff;
+             clear: both;
+        }
+        .footer-box .foot-nav {
+                padding-top: 15px;
+                text-align: center;
+                border-top: 1px solid #ccdcef;
+                position: relative;
+            }
+        .footer-box .foot-nav2{
+            text-align: center;
+        }
+
+		ul li .ct_page_edge{
+			width: 70px;
+		}
+    </style>
+</head>
+<body>
+<div class="head">
+    <div class="head_content">
+        <marquee behavior="scroll" direction="right" color="blue" id="111">爱是一道光  绿到你发光</marquee>
+        <script>
+            function test(){
+
+            var mywel = document.getElementById("111");
+            var content = mywel.innerText;
+
+            var f_content = content.charAt(0);
+            var l_content = content.substring(1,content.length);
+
+            var new_content = l_content + f_content;
+            mywel.innerText = new_content;
+
+        }
+        setInterval("test();", 50);
+        </script>
+
+        <a href="new.html" class="logo"></a>
+        <div class="menu">
+            <a href="#" class="tb active" ><font size="3">全部</font> </a>
+            <a href="#" class="tb"><font size="3" >管理</font> </a>
+            <a href="#" class="tb"><font size="3">kkj</font> </a>
+            <a href="#" class="tb"><font size="3">kkp</font> </a>
+            <a href="#" class="tb"><font size="3">NMSL</font> </a>
+        </div>
+        <div class="search">
+            <form action="/" method="post">
+                <input type="text" class="search-text" autocomplete="off">
+                <a href="new.html" class="i">
+                    <span class="ico"></span>
+                </a>
+            </form>
+        </div>
+        <div class="login_resgister">
+
+            <select size="1" id="lo">
+                <option value="login1" id="lg1">已有账号</option>
+                <option value="login1">游客登录</option>
+            </select>
+            <script>
+                function fun1() {
+                var obj=document.getElementById('lo');
+                var index=obj.selectedIndex; //序号，取当前选中选项的序号
+                var val = obj.options[index].text;
+                // alert(val)
+                    if (val="已有账号"){
+                        self.location="login.html";
+                    }
+                    if (val="游客登录"){
+                        self.location="login2.html"
+                    }
+
+                }
+            </script>
+            <a href="login.html"><font size="3" onclick="fun1()">登录</font> </a>
+            <a href="resgister.html"><font size="3">注册</font> </a>
+        </div>
+    </div>
+</div>
+<div class="main-content-box">
+    <div class="main-content">
+        <div class="content_L">
+            <div class="top-area">
+				<div class="child-nav">
+					<a href="#"  class="hotbtn active" >高级成员</a>
+					<a href="#"  class="newbtn"    >最帅</a>
+					<a href="#"  class="personbtn" >排行榜</a>
+				</div>
+
+
+				<div class="sort-nav">
+					<a href="#"  class="sortbtn active" >最近发言</a>
+					<a href="#"  class="newbtn" >24小时</a>
+					<a href="#"  class="newbtn" >3天</a>
+				</div>
+
+				<a href="#" class="publish-btn">
+                    <span class="n2">添加</span>
+				</a>
+
+			</div>
+            <div class="content-info">
+                <marquee behavior="scroll" direction="right" color="blue">点击图片进行聊天</marquee>
+                <ul id="content_img">
+                    <li class="show">
+                        <div><a href="http://wpa.qq.com/msgrd?v=3&uin=1074450267&site=qq&menu=yes"><img src="image/2.jpg" alt="Toxic" href="http://wpa.qq.com/msgrd?v=3&uin=1074450267&site=qq&menu=yes"><a href="http://wpa.qq.com/msgrd?v=3&uin=1074450267&site=qq&menu=yes" target="_blank">昵称：Toxic</a>
+                            <span><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1074450267&website=www.oicqzone.com">添加好友</a> </span></a></div>
+                        <div><a href="http://wpa.qq.com/msgrd?v=3&uin=459787903&site=qq&menu=yes"><img src="image/1.jpg" alt="未来" href="http://wpa.qq.com/msgrd?v=3&uin=459787903&site=qq&menu=yes" ><a href="http://wpa.qq.com/msgrd?v=3&uin=459787903&site=qq&menu=yes" target="_blank">昵称：未来</a>
+                            <span><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=459787903&website=www.oicqzone.com">添加好友</a> </span></a></div>
+                        <div><a href="http://wpa.qq.com/msgrd?v=3&uin=1315125902&site=qq&menu=yes"><img src="image/kb.bmp" alt="kb" href="http://wpa.qq.com/msgrd?v=3&uin=1315125902&site=qq&menu=yes" ><a href="http://wpa.qq.com/msgrd?v=3&uin=1315125902&site=qq&menu=yes" target="_blank">昵称：相忘于江湖</a>
+                            <span><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1315125902&website=www.oicqzone.com">添加好友</a> </span></a></div>
+                        <div><a href="http://wpa.qq.com/msgrd?v=3&uin=2286338680&site=qq&menu=yes"><img src="image/嘉嘉.jpg" alt=" ︎" href="http://wpa.qq.com/msgrd?v=3&uin=2286338680&site=qq&menu=yes" ><a href="http://wpa.qq.com/msgrd?v=3&uin=2286338680&site=qq&menu=yes" target="_blank">昵称： ︎</a>
+                            <span><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2286338680&website=www.oicqzone.com">添加好友</a> </span></a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>>
+    </div>
+</div>
+<div class="footer-box">
+    <div class="foot-nav">
+            <a href="#" target="_blank">关于我们</a>
+			<span>|</span>
+			<a href="#" target="_blank">联系我们</a>
+			<span>|</span>
+			<a href="#" target="_blank">服务条款</a>
+			<span>|</span>
+			<a href="#" target="_blank">隐私政策</a>
+			<span>|</span>
+			<a href="#" target="_blank">私密工具</a>
+			<span>|</span>
+			<a href="#" target="_blank">下载客户端</a>
+			<span>|</span>
+			<a href="#" target="_blank">意见与反馈</a>
+			<span>|</span>
+			<a href="#" target="_blank">友情链接</a>
+			<span>|</span>
+			<a href="#" target="_blank">公告</a>
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=35010202000521" target="_blank" style="margin-left:0;vertical-align:-2px;">
+			<img src="//static.doutula.com/img/gab.png" width="36" height="14">
+		</a>
+        </div>
+
+        <div class="foot-nav2">
+        <a target="_blank" href="#">
+			<img class="foot_e" src="images/footer1.gif" width="36" height="14">
+		</a>
+        <span class="foot_d">我的站点</span>
+        <span class="foot_a">©wangzx1221.com</span>
+        <a target="_blank" href="#" class="foot_b">我们致力于中国人民共和国的和平与稳定 11011101110110</a>
+        <div style="margin-top:6px;">版权所有：江苏省常州市</div>
+        </div>
+	</div>
+    </div>
+</div>
+</body>
+</html>

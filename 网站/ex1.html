@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+      .black_overlay{
+         display: none;
+         position: absolute;
+         top: 0%;
+         left: 0%;
+         width: 100%;
+         height: 100%;
+         background-color: #ffffff;
+         z-index:1001;
+         -moz-opacity: 0.8;
+         opacity:.80;
+         filter: alpha(opacity=80);
+    }
+    .white_content {
+        display: none;
+        position: absolute;
+        top: 10%;
+        left: 30%;
+        background-color: white;
+        z-index:1002; /* 数字的大小指明了div的相对层，数字大的在上层 */
+        overflow: auto;
+    }
+</style>
+    <script  type="text/javascript">
+    function openWindow(obj){
+        var qq_or_weixin = "light_qq";
+        switch(obj.id)
+        {
+            case 'contact_weixin':
+            qq_or_weixin = "light_weixin";
+            break;
+
+            case 'contact_qq':
+            qq_or_weixin = "light_qq";
+            break;
+        }
+        document.getElementById(qq_or_weixin).style.display='block';
+        document.getElementById('fade').style.display='block';
+    }
+    function closeWindow(){
+        document.getElementById('light_weixin').style.display='none';
+        document.getElementById('light_qq').style.display='none';
+        document.getElementById('fade').style.display='none';
+    }
+</script>
+</head>
+<body>
+<div class="top_contact_us">
+    <div class="top_telphone"></div>
+    <div class="top_weixin"><a href="#" id="contact_weixin" onclick="openWindow(this)">微信公众号</a></div>
+    <div class="top_qq"><a href="#" id="contact_qq" onclick="openWindow(this)">官方答疑群</a></div>
+</div>
+<div id="light_qq" class="white_content">
+    <img src='static/img/Screenshot_2019-04-14-18-51-31-618_com.eg.android.png' />
+</div>
+<div id="light_weixin" class="white_content">
+    <img src='static/img/Screenshot_2019-04-14-18-51-31-618_com.eg.android.png' />
+</div>
+<div id="fade" class="black_overlay"  onClick="closeWindow()">
+</div>
+</body>
+</html>
