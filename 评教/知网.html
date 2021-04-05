@@ -1,0 +1,576 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><title>
+	论文列表
+</title><link href="Script/WebUploader/webuploader.css" rel="stylesheet" /><link href="Script/easyui.css" rel="stylesheet" /><link href="css/xt.css" rel="stylesheet" type="text/css" /><link href="css/SWFUpload.css" rel="stylesheet" type="text/css" /><link href="css/FileList.css" rel="stylesheet" type="text/css" /><link href="css/writeInfo.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="Script/Common.js"></script>
+
+    <script type="text/javascript" src="Script/jQuery.js"></script>
+
+    <script type="text/javascript">
+        function showCKWX() {
+            var obj = Fid("div_ckwx");
+
+            if (obj != null) {
+                obj.style.display = 'block';
+                FsetOffsetWindowPostionByRate(obj, 2, 3);
+                FsetModal();
+            }
+        }
+        function CloseCKWX() {
+            var obj = Fid("div_ckwx");
+
+            if (obj != null) {
+                obj.style.display = 'none';
+                FunsetModal();
+            }
+        }
+        function CheckSelect() {
+
+            var temp = document.getElementById("ctl00_ContentPlaceHolder1_GridView1")
+
+            if (temp != null) {
+                var objs = temp.getElementsByTagName("input");
+
+                var count = 0;
+
+                for (var i = 0; i < objs.length; i++) {
+                    if (objs[i].type == "checkbox" && objs[i].checked) {
+                        count++;
+                    }
+                }
+
+                if (count == 2) {
+                    return true;
+                }
+                else {
+                    alert("请选择2篇文章进行比对！");
+                    return false;
+                }
+            }
+
+            return false;
+        }
+        function PrintMessage() {
+            var obj = Fid("div_ckwx");
+
+            if (obj != null) {
+                obj.style.left = "0";
+            }
+
+            document.getElementById("wb").ExecWB(7, 1);
+        }
+        function PrintMessage2() {
+            var obj = Fid("div_ckwx");
+
+            if (obj != null) {
+                obj.style.left = "0";
+            }
+
+            window.print();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function ShowSameBlock(id) {
+            var obj = $("#lc_div a");
+
+            for (var i = 0; i < obj.length; i++) {
+                obj[i].className = "Blue";
+            }
+
+            var lobj = $("[name='leftblock" + id + "']");
+
+            for (var i = 0; i < lobj.length; i++) {
+                lobj[i].className = "Red";
+            }
+
+            obj = $("#rc_div span");
+
+            for (var i = 0; i < obj.length; i++) {
+                obj[i].className = "Blue";
+            }
+
+            var robj = $("[name='rightblock" + id + "']");
+
+            for (var i = 0; i < robj.length; i++) {
+                robj[i].className = "Red";
+
+                var temp_span = robj[i].getElementsByTagName("span");
+
+                for (var k = 0; k < temp_span.length; k++) {
+                    temp_span[k].className = "Red";
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        .CloseIcon {
+            background-image: url(images/closeButton1-1.gif);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .Result_div {
+            width: 450px;
+            float: left;
+            height: 550px;
+            border: solid 1px #c6cbcf;
+            margin-left: 8px;
+            margin-right: 7px;
+            margin-top: 10px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+        .Title_div {
+            margin: 5px;
+            border: solid 1px #c6cbcf;
+            line-height: 24px;
+            height: 50px;
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+
+        .Con_div {
+            height: 480px;
+            margin: 5px;
+            border: solid 1px #c6cbcf;
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow-y: scroll;
+        }
+
+            .Con_div p {
+                text-indent: 2em;
+                margin: 0;
+                padding: 0;
+                line-height: 20px;
+            }
+
+        .author_list {
+            margin-top: 5px;
+            margin-left: 5px;
+            text-align: center;
+            width: 60px;
+            line-height: 26px;
+            height: 26px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .ClickBefore {
+            height: 530px;
+            text-align: right;
+        }
+
+        .ClickAfter {
+            height: 530px;
+            overflow-y: scroll;
+            text-align: right;
+        }
+
+        @media print {
+            table {
+                display: none;
+            }
+
+            img {
+                display: none;
+            }
+
+            p {
+                display: none;
+            }
+
+            .Result_div {
+                display: block;
+                width: 450px;
+                float: left;
+                height: auto;
+                border: solid 1px #c6cbcf;
+                margin-left: 8px;
+                margin-right: 7px;
+                margin-top: 10px;
+                word-break: break-all;
+                word-wrap: break-word;
+            }
+
+            .Title_div {
+                display: block;
+                margin: 5px;
+                border: solid 1px #c6cbcf;
+                line-height: 24px;
+                height: 50px;
+                word-break: break-all;
+                word-wrap: break-word;
+                overflow: hidden;
+            }
+
+            .Con_div {
+                display: block;
+                height: auto;
+                margin: 5px;
+                border: solid 1px #c6cbcf;
+                word-break: break-all;
+                word-wrap: break-word;
+                overflow-y: scroll;
+            }
+
+                .Con_div a {
+                    color: #000000;
+                    text-decoration: underline;
+                }
+
+                .Con_div div {
+                    color: #000000;
+                    text-decoration: underline;
+                }
+
+            a {
+                color: #000000;
+                text-decoration: underline;
+            }
+
+                A.Blue {
+                    color: #000000;
+                    text-decoration: underline;
+                }
+
+                    A.Blue:visited {
+                        color: #000000;
+                        text-decoration: underline;
+                    }
+
+                A.Red {
+                    color: #000000;
+                    text-decoration: underline;
+                }
+
+                    A.Red:visited {
+                        color: #000000;
+                        text-decoration: underline;
+                    }
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        function ss() {
+            if (window.event.keyCode == 8)//屏蔽退格键
+            {
+                var type = window.event.srcElement.type; //获取触发事件的对象类型
+                //var tagName=window.event.srcElement.tagName;
+                var reflag = window.event.srcElement.readOnly; //获取触发事件的对象是否只读
+                var disflag = window.event.srcElement.disabled; //获取触发事件的对象是否可用
+                if (type == "text" || type == "textarea")//触发该事件的对象是文本框或者文本域
+                {
+                    if (reflag || disflag)//只读或者不可用
+                    {
+                        //window.event.stopPropagation();
+                        window.event.returnValue = false; //阻止浏览器默认动作的执行
+                    }
+                }
+                else {
+                    window.event.returnValue = false; //阻止浏览器默认动作的执行
+                }
+            }
+        }
+    </script>
+
+</head>
+<body onkeydown="ss();">
+    <form name="aspnetForm" method="post" action="FileList.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="Y1lLlLQrLkCISP52e/6lEGdOhk2hPtDvF5sHSLZsRws6JdsgHM5ZRGIkDpzFLe5yIDw964oOb1VNSXO66Mv0RG2vIruMDlrSeW3QrEYxzgX9P/VScPzWyrgHjtg6cAykqAPbxzzE4I7sekvFcnXXdmsMHYvyhk+xb1K+jBfQzoSaS9SwppMcMqbZRGQLqRR5VoD6F0IQQiHGZa/EehYCJ9VldvT9iSQTuS7ESiGecIBx59CDa0G2xph3ycEGlLAfRN+WwhruXtBcdJ65kp9VBJrrrfo/dz2Tm2jBBy8HKmmub4QNjFl/oymZsuDVK2Vm1Jg+OzPFkWrdtqkt7EKM3RUCEqoXnvY/UTMKtOPh6vSy9iSbFqOs1sb1QBC8R6ni3QK3Ku6VzHZHE4Hg5JRZFWJIdVV/OSuUToJVuMYDTyY6VwUZ0AGmQXZVk3secW8Ckw0SLLKVjcaxcQebN7cxog2IJXO1GJR2xOWRPKq7PXyxO6QYDT4LdDww7ay80z4EeTl1qEpDWIbmaGAt7adXgnWIUu51LdfX/63iuvyJICk8efYxKGPMCplWVA+bvoxfC3ZGa1ki8/bIuDWJgmaJxq70UBdTewdNV+IR2ZB8uXvJ+xQn2xTm0niGxZ7UqfsEhDOJs9qZ4WbLabAbkg+jB4Dl/VkNIx8FncEj6X3zZzHOVx7I2fhBCMIF1wHH3yXLxBHiHTM6ZsPOg+FgDror8RdiZPh+8wsFoiQ16uKDgWtcwV0H/mqmt/eVkqJJE7usWEcpGWZ1DypzsHh1FX2mkr3QQ95GNPvqomaJiy9Uw51rJlbivRLwwtpsEpdiuuvf6AT36woLOlswtcEDA/EFNB64ueb0kxdSFdGqSs3xTpAQYf3bRultYfvltc+qB8lfX1KeLsEIhS6uTPjC9XL9dVgH/tbReRf9LWRPubIvIfc9u+OYaJAxc+yqzmli4SExviQvMR655KAnQl6ChRt0KtzYLQSl1ziYz0X8du5WciYZnz3ZNodau3x9UOt4Nb/esXSoSid81Th+hdQEqApKCa+6d+QCoys8TXfjzYKKR1NgxgR4RdSNaQtFVRTGAnMC6mSYhInnd9Xubiu7aeJKoIj1raM5IGdefFNhBHuKRpwi40LU3sZI/Ca1HKJH/YAgz0196m4iTv1ai5elOobOCoDYF0GH95EqStDjgsfsDWbboVkYfoyi6Mx6AWJY2iXMtpVC44jJzutOeaaQEHZsitmOKpt+gVqHGjGuJK+HScoC0hXvFD0+3PZJkczY2EIi6Sthupdnx2IfOesRLIxkAk23Y7X+7B8wnu4BOg3O3IHNWzMb2k9jZpdZ/fLozk/uMCRAXaVtYWQ1Ejy0vA/ir6Erkc4iSfq6AISKSPQxCfPI0G4dcnL7un7l+Rkxf3VAK7QRsKN+bYRW8UKoyruDi+VMzSqpl5A9YQDx5edLFbsPt5g0FMuJvRFKAH8rg7l/1ItFHAJQqGFju45JwuJAPW+AwZJ1CvIOdXpeC13qQjfJ4B4gQV+6mdt/zr2VjfdltVxZnXnbW8QmlVGcrqOi3NlZG0kXcUx7VYg712XQAHG8SR+kjLYYVFuCz8CX5ZCGIoSx+NKHrn5Hee6yOCV6BxL9q6ug+yKCmdi9EizivLEB6wsYHrZm3z9zMduKhOe7eeRmzGIcboHfI8dNPpOz1Z9pR5mzZTVn7UgyRyOQwCEw66B57mSc4JAzr3Ut8TBOoQAozqN2CTk/dEPIo+wnBxYEmtMXXF9Ug3apZKjAzI6j7fuS2P1xS+o6aERsjzFNCQblHoPPLH1sWHF6LDbhMA6I6LenlmpNw/SOdpMn4hl9ctUFJERaMMridpgomUxE+lBqtRM8+TbRVoIrqn32IUq954jRH4FMelQJuTpD7qYh+dG2wEwHOdr+7OlgT6VVeZ4IDQ==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/user/WebResource.axd?d=5hn23FJVNMRgw0xLo5OcEzANFL8pN7poaTs7sF-tXgiztFcjCNiXfySe7NHr-VrMUDX-WpaRjlTsHfZYMk4uh04ujEs1&amp;t=634552670488448684" type="text/javascript"></script>
+
+
+<script src="/user/ScriptResource.axd?d=nlOz19NrN78dB0pPNVk1QEywXJPOnhDZbKFqJv0Zxza4eGN1xfuBcD8UYvj0uV_O8yQN3G0pScg0P7wQUhQLsGVqAFmq42HUfr4uE9WJvlfrIJXK_l4mm6aazCcxkJ5atyCdq4iIs_yAXBN9iNGQEf3muoecjK7xxM70gd6QXs-DT8jG0&amp;t=ffffffffca61dd38" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax 客户端框架未能加载。');
+//]]>
+</script>
+
+<script src="/user/ScriptResource.axd?d=gG_kO_WXJuV66IoYAzMuUAFRtEGK064FuWKVKAiHCVj1anIH8dPli_uc9MfGh0nEYnGz1b9q-uEq29gBTNqdn1FN5j1s9ZJnZecmBb7JihxpMMrNVllrn3O_2LQmRNXxwBi5aoQZUWE8PBzUPTJp5d_eJzQ_4yKUO84YH6OC8hP-NN3h0&amp;t=ffffffffca61dd38" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="UnVB7oWbs2YnExO/xvZE0UPbgaUCJHbbRjP1KwLj4m7io0hoUQHsQCsXfHIXNlmIRMBPewi5TT/Vf+D9vRwxeM8Xl+DjtMRY+lbWRrRGhsNs48eOiG++81B/esqKFwVhqEU4BkNn37oOvryK/tJP/mRS/qU=" />
+</div>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tctl00$ContentPlaceHolder1$UpdatePanel1'], [], [], 90);
+//]]>
+</script>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="images/pmlc_h1.gif" id="ctl00_img1" /></div>
+            <div class="header-r">
+                <div class="top">
+                </div>
+                <div class="accounts">
+                    <span class="p1">
+                        <span id="ctl00_dengluLbl">王子祥,</span>欢迎您使用论文管理系统</span>
+                </div>
+            </div>
+        </div>
+        <div class="mainbody">
+            <div class="left">
+                <div class="btn">
+                    <input type="image" name="ctl00$submitImgBtn" id="ctl00_submitImgBtn" src="images/pmlc_menu01.gif" style="border-width:0px;" />
+                </div>
+                <div class="btn">
+                    <input type="image" name="ctl00$submittedImgBtn" id="ctl00_submittedImgBtn" src="images/pmlc_menu02.gif" style="border-width:0px;" />
+                </div>
+                <div class="btn">
+                    <input type="image" name="ctl00$filelistImgBtn" id="ctl00_filelistImgBtn" src="images/pmlc_menu17.gif" style="border-width:0px;" />
+                </div>
+                
+                <div class="btn">
+                    <input type="image" name="ctl00$userInfroImgBtn" id="ctl00_userInfroImgBtn" src="images/pmlc_menu03.gif" style="border-width:0px;" />
+                </div>
+                <div class="btn">
+                    <input type="image" name="ctl00$changePwdImgBtn" id="ctl00_changePwdImgBtn" src="images/pmlc_menu04.gif" style="border-width:0px;" />
+                </div>
+                <div class="btn">
+                    <input type="image" name="ctl00$exitImgBtn" id="ctl00_exitImgBtn" src="images/pmlc_menu05.gif" style="border-width:0px;" />
+                </div>
+                <div class="p4">
+                    <div class="p4">
+                        论文状态：
+                        <span id="ctl00_tjzt">已提交</span><br />
+                        已提交次数：<span id="ctl00_tjcs">1</span><br />
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <a id="ctl00_HyperLink1" href="Help/%E2%80%9C%E4%B8%AD%E5%9B%BD%E7%9F%A5%E7%BD%91%E2%80%9D%E5%A4%A7%E5%AD%A6%E7%94%9F%E8%AE%BA%E6%96%87%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C%EF%BC%88%E5%AD%A6%E7%94%9F%EF%BC%89-2020%E5%B9%B44%E6%9C%88%E7%89%88.pdf" target="_blank"><img src="images/sy_btn_03.gif" style="border-width:0px;" /></a></div>
+                <div class="left-bg">
+                    <img src="images/pmlc_bg1.gif" alt="" />
+                </div>
+            </div>
+            <div class="right">
+                
+    <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+	
+            <div class="table">
+                
+                <div id="ctl00_ContentPlaceHolder1_Panel2">
+		
+                    <table width="760" border="0" cellspacing="0" cellpadding="0" height="40" background="images/pmlc_list.bg1.gif">
+                        <tr>
+                            <td width="550"></td>
+                        </tr>
+                    </table>
+                    <table width="760" border="0" cellspacing="0" cellpadding="0" class="table_listbtn">
+                        <tr>
+                            <td width="70">
+                                <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton1" id="ctl00_ContentPlaceHolder1_ImageButton1" src="images/pmlc_btn10.gif" onclick="return CheckSelect();" style="border-width:0px;" />
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td class="p6" style="text-align: right;">
+                                
+		<!-- AspNetPager V7.0.2 for VS2005 & VS2008  Copyright:2003-2007 Webdiyer (www.webdiyer.com) -->
+		<!--记录总数只有一页，AspNetPager已自动隐藏，若需在只有一页数据时显示AspNetPager，请将AlwaysShow属性值设为true！-->
+		<!-- AspNetPager V7.0.2 for VS2005 & VS2008 End -->
+
+		
+                            </td>
+                        </tr>
+                    </table>
+                    <div>
+			<table class="table_list_gv" cellspacing="0" rules="all" border="1" id="ctl00_ContentPlaceHolder1_GridView1" style="width:760px;border-collapse:collapse;">
+				<tr class="head_tr">
+					<th scope="col">选择</th><th scope="col">上传次序</th><th scope="col">篇名</th><th scope="col">
+                                    <img src="images/PMLC201903_ben.gif" alt="去除本人复制比" style="vertical-align: middle" title="去除本人复制比" />
+                                    检测结果
+                                </th><th scope="col">上传日期</th>
+				</tr><tr class="row_tr">
+					<td align="center" style="width:55px;">
+                                    <input id="ctl00_ContentPlaceHolder1_GridView1_ctl02_CheckBox1" type="checkbox" name="ctl00$ContentPlaceHolder1$GridView1$ctl02$CheckBox1" />
+                                    
+                                </td><td align="center" valign="middle" style="width:60px;">
+                                    第1次
+                                </td><td align="left" valign="middle">
+                                    <a href='Report.aspx?LeftFile=45577400&t=a' target="_blank">基于过程神经网络的人体动作识别与分析</a>
+                                </td><td align="left" valign="middle" style="width:80px;">
+                                    <div class="per_o" title="去除本人文字复制比">15.7%</div>
+                                </td><td align="center" valign="middle" style="width:80px;">
+                                    2020-05-26
+                                </td>
+				</tr>
+			</table>
+		</div>
+                    <table width="760" border="0" cellspacing="0" cellpadding="0" class="table_listbtn">
+                        <tr>
+                            <td width="70">
+                                <input type="image" name="ctl00$ContentPlaceHolder1$ImageButton3" id="ctl00_ContentPlaceHolder1_ImageButton3" src="images/pmlc_btn10.gif" onclick="return CheckSelect();" style="border-width:0px;" />
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td class="p6" style="text-align: right;">
+                                
+		<!-- AspNetPager V7.0.2 for VS2005 & VS2008  Copyright:2003-2007 Webdiyer (www.webdiyer.com) -->
+		<!--记录总数只有一页，AspNetPager已自动隐藏，若需在只有一页数据时显示AspNetPager，请将AlwaysShow属性值设为true！-->
+		<!-- AspNetPager V7.0.2 for VS2005 & VS2008 End -->
+
+		
+                            </td>
+                        </tr>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <img src="images/pmlc_tu1.gif" alt="" />
+                            </td>
+                        </tr>
+                    </table>
+                
+	</div>
+            </div>
+            <div id="ctl00_ContentPlaceHolder1_ImgPanel">
+		
+                <div style="width: 720px; text-align: center; height: auto;">
+                    <div>
+                        <span id="ctl00_ContentPlaceHolder1_Label3" style="font-size:Medium;font-weight:bold;">王子祥文献检测趋势图</span>
+                    </div>
+                    <img id="ctl00_ContentPlaceHolder1_Image1" src="AuthorPic.aspx" style="border-width:0px;" />
+                    <p>
+                        <span id="ctl00_ContentPlaceHolder1_Label1">注释：Y轴为文字复制比，X轴为上传的文献（按照上传时间由先到后排序）</span>
+                    </p>
+                </div>
+
+            
+	</div>
+            <div style="font: 0px/0px sans-serif; clear: both; display: block">
+            </div>
+            <div style="display: none; position: absolute; z-index: 200; width: 960px; height: 600px; background-color: #f0f8eb;"
+                id="div_ckwx">
+                <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                    <tr>
+                        <td class="w_t_l">&nbsp;
+                        </td>
+                        <td class="w_t_c">比对结果
+                        </td>
+                        <td class="w_t_r" onclick="CloseCKWX()">&nbsp;
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" border="0" cellspacing="0">
+                    <tr>
+                        <td class="w_b">
+                            <div style="word-break: break-all; word-wrap: break-word; height: 380px; height: auto; line-height: 18px; padding-bottom: 10px;">
+                                <div style="display: none;">
+                                    <a onclick="PrintMessage();" href="#">打印预览</a> | <a onclick="PrintMessage2();" href="#">打印</a><object classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="wb"
+                                        name="wb" width="0"></object>
+                                </div>
+                                <div class="Result_div">
+                                    <div class="Title_div">
+                                        文献一：<span id="ctl00_ContentPlaceHolder1_Label_Left_Title"></span><br />
+                                        <span id="ctl00_ContentPlaceHolder1_Label_LeftInfo"></span>&nbsp;&nbsp;上传时间：<span id="ctl00_ContentPlaceHolder1_Label_Left_Time"></span>
+                                    </div>
+                                    <div id="ctl00_ContentPlaceHolder1_lc_div" class="Con_div">
+                                    </div>
+                                </div>
+                                <div class="Result_div">
+                                    <div class="Title_div">
+                                        文献二：<span id="ctl00_ContentPlaceHolder1_Label_Right_Title"></span><br />
+                                        <span id="ctl00_ContentPlaceHolder1_Label_RightInfo"></span>&nbsp;&nbsp;上传时间：<span id="ctl00_ContentPlaceHolder1_Label_Right_Time"></span>
+                                    </div>
+                                    <div id="ctl00_ContentPlaceHolder1_rc_div" class="Con_div">
+                                    </div>
+                                </div>
+                                <div style="clear: both;">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+</div>
+    <div id="ctl00_ContentPlaceHolder1_UpdateProgress1" style="display:none;">
+	
+            <div class="Load_Div">
+                <img src="images/ajax-loaderg.gif" alt="" />数据加载中
+            </div>
+        
+</div>
+
+            </div>
+            <div style="font: 0px/0px sans-serif; clear: both; display: block">
+            </div>
+        </div>
+        <div class="footer" style="height:80px;">
+            <p class="p4">
+                京ICP证040431号 网络出版服务许可证（总）网出证（京）字第271号<br />
+                京公网安备11010802020460号<br />
+                &copy; 2009-2020《中国学术期刊（光盘版）》电子杂志社有限公司<br />
+                平台基础技术由同方知网数字出版技术股份有限公司提供
+            </p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        try {
+            //为解决在IE10中点击updatepanel里面的imagebutton时出现的错误
+            Sys.WebForms.PageRequestManager.getInstance()._origOnFormActiveElement = Sys.WebForms.PageRequestManager.getInstance()._onFormElementActive;
+            Sys.WebForms.PageRequestManager.getInstance()._onFormElementActive = function(element, offsetX, offsetY) {
+                if (element.tagName.toUpperCase() === 'INPUT' && element.type === 'image') {
+                    offsetX = Math.floor(offsetX);
+                    offsetY = Math.floor(offsetY);
+                }
+                this._origOnFormActiveElement(element, offsetX, offsetY);
+            };
+        }
+        catch (ieerror) { }
+    </script>
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+alert("您已经没有了提交权限,不能提交新论文了");Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_ContentPlaceHolder1_UpdatePanel1","displayAfter":50,"dynamicLayout":true}, null, null, $get("ctl00_ContentPlaceHolder1_UpdateProgress1"));
+});
+//]]>
+</script>
+</form>
+</body>
+</html>
